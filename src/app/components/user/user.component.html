@@ -1,0 +1,22 @@
+<div *ngIf="dataLoaded==false" class="spinner-border text-info" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Müşteri Id</td>
+            <td>Kullanıcı Adı</td>
+            <td>kullanıcı Soyad</td>
+            <td>email</td>
+            <td>durum</td>
+        </tr>
+    </thead>
+    <tr *ngFor="let user of users">
+        <td>{{user.id}}</td>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.status}}</td>
+    </tr>
+</table>
+
