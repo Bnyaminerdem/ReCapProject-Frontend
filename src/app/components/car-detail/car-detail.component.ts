@@ -12,7 +12,7 @@ import { CarDetail } from '../../models/carDetail';
 export class CarDetailComponent implements OnInit {
 
 
-  imageUrl = 'https://localhost:44362/Uploads/Images/';
+  imageUrl = 'https://localhost:44383/Uploads/Images/';
   carDetails:CarDetail[]=[] ;
 
   constructor(private carDetailService:CarDetailService,private activatedRoute :ActivatedRoute
@@ -27,20 +27,20 @@ export class CarDetailComponent implements OnInit {
   }
 
   getCarDetails(carId:Number){
-    this.carDetailService.getCarDetailsByCarId(carId).subscribe(response=>{
+    this.carDetailService.getCarDetailsById(carId).subscribe(response=>{
       this.carDetails=response.data
     })
   }
 
   getCarImage(imagePath: string): string {
     if (imagePath) {
-      return 'https://localhost:44310/Uploads/Images/' + imagePath
+      return 'https://localhost:44383/Uploads/Images/' + imagePath
     } else {
-      return 'https://localhost:44310/Uploads/Images/DefaultCarImage.jpg';
+      return 'https://localhost:44383/Uploads/Images/DefaultCarImage.jpg';
     }
   }
   getDefaultCarImage():string{
-    return 'https://localhost:44310/Uploads/Images/DefaultCarImage.jpg';
+    return 'https://localhost:44383/Uploads/Images/DefaultCarImage.jpg';
   }
 
 

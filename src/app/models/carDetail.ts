@@ -1,11 +1,14 @@
 import { CarImage } from "./carImage"
 
 export interface CarDetail{
-    id:number,
+    carId:number,
+    colorId:number,
+    brandId:number,
     carName:string,
     brandName:string,
     colorName:string,
-    dailyPrice:number
+    modelYear:number,
+    dailyPrice:number,
     description:string,
-    carImages:CarImage[]
+    ImagePath:CarImage[]
 }

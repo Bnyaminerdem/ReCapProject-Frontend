@@ -15,15 +15,15 @@ export class CarDetailService {
   getCarDetails():Observable<ListResponseModel<CarDetail>>{
     return this.httpClient.get<ListResponseModel<CarDetail>>(this.apiUrl)
   }
-  getCarDetailsByCarId(carId:Number):Observable<ListResponseModel<CarDetail>>{
-    var url = this.apiUrl + "bycarid/?carId="+carId
+  getCarDetailsById(carId:Number):Observable<ListResponseModel<CarDetail>>{
+    var url = this.apiUrl + "byid/?carId="+carId
     return this.httpClient.get<ListResponseModel<CarDetail>>(url)
   }
   getCarDetailsByBrandId(brandId:Number):Observable<ListResponseModel<CarDetail>>{
-    var url = this.apiUrl + "bybrandid/?brandId="+brandId
+    var url = this.apiUrl +"bybrandid/?brandId="+brandId
     return this.httpClient.get<ListResponseModel<CarDetail>>(url)
   }
-  getCarDetailsByColorId(colorId:number):Observable<ListResponseModel<CarDetail>>{
+  getCarDetailsByColorId(colorId:Number):Observable<ListResponseModel<CarDetail>>{
     var url = this.apiUrl +"bycolorid/?colorId="+colorId
     return this.httpClient.get<ListResponseModel<CarDetail>>(url)
   }
