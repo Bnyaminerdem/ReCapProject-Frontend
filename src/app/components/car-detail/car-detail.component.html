@@ -1,0 +1,25 @@
+<div class="card text-center">
+    <div class="card-header">
+      Araba Detay Sayfası
+    </div>
+
+    <div class="card-body" *ngFor="let carDetail of carDetails">
+        <div >
+            <img id="img" *ngIf="!carDetail.carImages || carDetail.carImages.length === 0" [src]="getDefaultCarImage()" class="card-img-top">
+            <img *ngFor="let carImage of carDetail.carImages" id="img" [src]="getCarImage(carImage.imagePath)" class="card-img-top" alt="...">
+        </div>
+
+        <div class="ozellikler">
+          <h5 class="card-title"><b>{{carDetail.carName}}</b></h5>
+          <p class="card-text"><b>Marka Adı:</b>{{carDetail.brandName}}</p>
+          <p class="card-text"><b>Renk Adı:</b>{{carDetail.colorName}}</p>
+          <p class="card-text"><b>Günlük Fiyat:</b>{{carDetail.dailyPrice}}</p>
+          <p class="card-text"><b>Açıklama:</b>{{carDetail.description}}</p>
+          <a href="#" class="btn btn-primary">KİRALA</a>
+        </div>
+
+    </div>
+    <div class="card-footer text-body-secondary">
+      footer
+    </div>
+  </div>
