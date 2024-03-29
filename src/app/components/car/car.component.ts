@@ -52,8 +52,9 @@ export class CarComponent implements OnInit {
   }
 
   getCarImagePath(carDetail: CarDetail): string {
-    if (carDetail.ImagePath && carDetail.ImagePath.length > 0) {
-      return 'https://localhost:44383/Uploads/Images/' + carDetail.ImagePath[0].imagePath;
+    if (carDetail.carImage && carDetail.carImage.length > 0) {
+      const firstImagePath = carDetail.carImage[0].imagePath;
+      return 'https://localhost:44383/Uploads/Images/' + firstImagePath;
     } else {
      
       return 'https://localhost:44383/Uploads/Images/DefaultCarImage.jpg';
