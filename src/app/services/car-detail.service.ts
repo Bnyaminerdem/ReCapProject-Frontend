@@ -20,11 +20,11 @@ export class CarDetailService {
     return this.httpClient.get<ListResponseModel<CarDetail>>(url)
   }
   getCarDetailsByBrandId(brandId:Number):Observable<ListResponseModel<CarDetail>>{
-    var url = this.apiUrl +"bybrandid/?brandId="+brandId
+    var url = this.apiUrl +"bywithbrandid/?brandId="+brandId
     return this.httpClient.get<ListResponseModel<CarDetail>>(url)
   }
   getCarDetailsByColorId(colorId:Number):Observable<ListResponseModel<CarDetail>>{
-    var url = this.apiUrl +"bycolorid/?colorId="+colorId
+    var url = this.apiUrl +"bywithcolorid/?colorId="+colorId
     return this.httpClient.get<ListResponseModel<CarDetail>>(url)
   }
 }
