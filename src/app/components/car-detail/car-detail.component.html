@@ -5,8 +5,8 @@
 
     <div class="card-body" *ngFor="let carDetail of carDetails">
         <div >
-            <img id="img" *ngIf="!carDetail.carImages || carDetail.carImages.length === 0" [src]="getDefaultCarImage()" class="card-img-top">
-            <img *ngFor="let carImage of carDetail.carImages" id="img" [src]="getCarImage(carImage.imagePath)" class="card-img-top" alt="...">
+            <img id="img" *ngIf="!carDetail.carImage || carDetail.carImage.length === 0" [src]="getDefaultCarImage()" class="card-img-top">
+            <img *ngFor="let carImage of carDetail.carImage" id="img" [src]="getCarImage(carImage.imagePath)" class="card-img-top" alt="...">
         </div>
 
         <div class="ozellikler">
