@@ -5,6 +5,8 @@ import { CarService } from '../../services/car.service';
 import { CarDetail } from '../../models/carDetail';
 import { CarDetailService } from '../../services/car-detail.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-car',
@@ -15,9 +17,14 @@ export class CarComponent implements OnInit {
 
   carDetails : CarDetail[]= []
   dataLoaded:boolean = false;
+  filterText = "";
 
 
-  constructor(private carDetailService :CarDetailService,private activatedRoute:ActivatedRoute){}
+  constructor(private carDetailService :CarDetailService,
+    private activatedRoute:ActivatedRoute,
+    private toastrService:ToastrService,
+    private cartService:CartService) {}
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
       if(params["brandId"]){
@@ -52,13 +59,18 @@ export class CarComponent implements OnInit {
   }
 
   getCarImagePath(carDetail: CarDetail): string {
-    if (carDetail.carImage && carDetail.carImage.length > 0) {
+    if (carDetail.carImage && carDetail.carImage.length > 0 ) {
       const firstImagePath = carDetail.carImage[0].imagePath;
       return 'https://localhost:44383/Uploads/Images/' + firstImagePath;
     } else {
      
       return 'https://localhost:44383/Uploads/Images/DefaultCarImage.jpg';
     }
+  }
+
+  addToCart(carDetail:CarDetail) {
+    this.toastrService.success("Sepete Eklendi",carDetail.carName)
+   this.cartService.addToCart(carDetail);
   }
 }
 

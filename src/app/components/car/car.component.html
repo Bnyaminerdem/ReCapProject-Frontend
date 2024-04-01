@@ -1,17 +1,28 @@
 <div *ngIf="dataLoaded == false" class="spinner-border text-primary" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
-  
+
+  <div class="mb-3">
+    <label for="filterText" class="form-label">Araba Ara</label>
+    <input type="text" [(ngModel)]= "filterText" class="form-control" id="filterText" placeholder="Arama İfadesi Giriniz">
+  </div>
+<div *ngIf="filterText" class="alert alert-success">
+{{filterText}} aradınız
+</div>
+
+
   <div class="card-container">
-      <div id="card" class="card" style="width: 18rem;" *ngFor="let carDetail of carDetails ">
+      <div id="card" class="card" style="width: 18rem;" *ngFor="let carDetail of carDetails | filterPipe:filterText ">
         <img id="img" [src]="getCarImagePath(carDetail)" class="object-fit: cover" alt="...">
         
         <div class="card-body">
-          <h5 id="carName" class="card-title">{{carDetail.carName}}</h5>
+          <h5 id="carName" class="card-title">{{carDetail.carName |uppercase}}</h5>
           <p id="prop" class="card-text">{{carDetail.description}}</p>
           <p id="prop" class="card-text"><b>Marka:</b>{{carDetail.brandName}}</p>
           <p id="prop" class="card-text"><b>Renk:</b>{{carDetail.colorName}}</p>
-          <p id="prop" class="card-text"><b>Günlük Ücret:</b>{{carDetail.dailyPrice}}</p>
+          <p id="prop" class="card-text"><b>Günlük Ücret:</b>{{carDetail.dailyPrice |currency}}</p>
+          <p id="prop" class="card-text"><b>Kdv li fiyat:</b>{{carDetail.dailyPrice |vatAdded:18 |currency }}</p>
+          <p><button (click)="addToCart(carDetail)" type="button" class="btn btn-success">Sepete Ekle</button></p>
         </div>
         <a id="button" routerLink="/carDetail/{{carDetail.carId}}" class="btn btn-primary"><b>Kirala</b></a>
       </div>
