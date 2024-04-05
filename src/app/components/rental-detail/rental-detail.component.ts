@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RentalDetail } from '../../models/rentalDetail';
 import { RentalDetailService } from '../../services/rental-detail.service';
+import { CarDetail } from '../../models/carDetail';
 
 @Component({
   selector: 'app-rental-detail',
@@ -9,7 +10,8 @@ import { RentalDetailService } from '../../services/rental-detail.service';
 })
 export class RentalDetailComponent implements OnInit {
 
-  rentalDetails : RentalDetail[] = []
+  rentalDetails : RentalDetail[] = [];
+  carDetails:CarDetail[];
 
   constructor(private rentalDetailService:RentalDetailService){}
   ngOnInit(): void {

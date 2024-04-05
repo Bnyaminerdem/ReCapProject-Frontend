@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class CartSummaryComponent implements OnInit {
   
   cartItems:CartItem[]=[];
+  itemLoaded :boolean;
+  currentCart:CartItem;
 
 constructor(private cartService:CartService, private toastrService:ToastrService) {}
 
@@ -27,5 +29,7 @@ removeFromCart(carDetail:CarDetail){
   this.cartService.removeFromCart(carDetail)
   this.toastrService.error("Silindi",carDetail.carName + " Sepetten Silindi ")
 }
-
+setCurrentCart(cartItems:CartItem){
+  this.currentCart = cartItems;
+}
 }

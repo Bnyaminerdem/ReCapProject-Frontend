@@ -3,6 +3,10 @@ import { CarService } from '../../services/car.service';
 import { CarDetailService } from '../../services/car-detail.service';
 import { ActivatedRoute } from '@angular/router';
 import { CarDetail } from '../../models/carDetail';
+import { ToastrService } from 'ngx-toastr';
+import { CartService } from '../../services/cart.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { CartItem } from '../../models/cartItem';
 
 @Component({
   selector: 'app-car-detail',
@@ -14,8 +18,20 @@ export class CarDetailComponent implements OnInit {
 
   imageUrl = 'https://localhost:44383/Uploads/Images/';
   carDetails:CarDetail[]=[] ;
-
-  constructor(private carDetailService:CarDetailService,private activatedRoute :ActivatedRoute
+  cartItems:CartItem[]=[];
+  itemLoaded :boolean;
+  rentalMessage: string = '';
+  rentDate : Date | null = null;
+  returnDate : Date | null = null;
+  rentalAddForm : FormGroup;
+  
+  constructor(private carDetailService:CarDetailService,
+    private activatedRoute :ActivatedRoute,
+    private toastrService:ToastrService,
+    private cartService:CartService,
+    private carService:CarService,
+    private rentalService:CarDetailService,
+    private formBuilder:FormBuilder
     ){}
 
   ngOnInit(): void {
@@ -43,5 +59,18 @@ export class CarDetailComponent implements OnInit {
     return 'https://localhost:44383/Uploads/Images/DefaultCarImage.jpg';
   }
 
+addToCart(carDetail:CarDetail){
+    if(carDetail.carId===8){
+      this.toastrService.error("Araç sepete eklenemedi", "Araç başkası tarafından kiralanmış durumda",{
+        progressBar:true
+      })
+    }else{
+      console.log(carDetail)
+      this.cartService.addToCart(carDetail);
+      this.toastrService.success("Araç sepete eklendi",carDetail.brandName+" "+carDetail.carName,{
+        progressBar:true
+      })
+    }
 
+  }
 }

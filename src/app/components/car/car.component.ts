@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../services/cart.service';
 
+
 @Component({
   selector: 'app-car',
   templateUrl: './car.component.html',
@@ -20,14 +21,18 @@ export class CarComponent implements OnInit {
   filterText = "";
 
 
-  constructor(private carDetailService :CarDetailService,
+  constructor(
+    private carDetailService :CarDetailService,
     private activatedRoute:ActivatedRoute,
     private toastrService:ToastrService,
     private cartService:CartService) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
-      if(params["brandId"]){
+      if(params["brandId"] && params["colorId"]){
+        this.getCarByBrandAndColor(params["brandId"], params["colorId"]);
+      }
+      else if(params["brandId"]){
         this.getCarDetailsByBrandId(params["brandId"])
       }
       else if(params["colorId"]){
@@ -36,6 +41,13 @@ export class CarComponent implements OnInit {
       else{
         this.getCarDetails();
       }
+    })
+  }
+
+  getCarByBrandAndColor(brandId: number, colorId: number) {
+    this.carDetailService.getCarByBrandAndColor(brandId, colorId).subscribe(response =>{
+      this.carDetails = response.data
+      this.dataLoaded = true
     })
   }
 

@@ -19,6 +19,11 @@ import { FilterPipePipe } from './pipes/filter-pipe.pipe';
 
 import { ToastrModule } from 'ngx-toastr';
 import { CartSummaryComponent } from './components/cart-summary/cart-summary.component';
+import { FilterColorPipePipe } from './pipes/filter-color-pipe.pipe';
+import { FilterBrandPipePipe } from './pipes/filter-brand-pipe.pipe';
+import { CarFilterComponent } from './components/car-filter/car-filter.component';
+import { CartDetailComponent } from './components/cart-detail/cart-detail.component';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +38,11 @@ import { CartSummaryComponent } from './components/cart-summary/cart-summary.com
     CarDetailComponent,
     VatAddedPipe,
     FilterPipePipe,
-    CartSummaryComponent
+    CartSummaryComponent,
+    FilterColorPipePipe,
+    FilterBrandPipePipe,
+    CarFilterComponent,
+    CartDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +51,8 @@ import { CartSummaryComponent } from './components/cart-summary/cart-summary.com
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      positionClass:"toast-bottom-right"
+      positionClass:"toast-bottom-right",
+      progressAnimation:"decreasing"
     })
   ],
   providers: [],

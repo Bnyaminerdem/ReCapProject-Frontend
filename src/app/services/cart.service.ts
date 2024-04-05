@@ -2,31 +2,48 @@ import { Injectable } from '@angular/core';
 import { CarDetail } from '../models/carDetail';
 import { CartItem } from '../models/cartItem';
 import { CartItems } from '../models/carItems';
+import { ListResponseModel } from '../models/listResponseModel';
+import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  constructor() { }
+  apiUrl="https://localhost:44383/api/";
 
-  addToCart(carDetail:CarDetail) {
-    let item = CartItems.find(c=>c.carDetail.carId===carDetail.carId);
-    if(item) {
+  constructor(
+    private toastrService:ToastrService,
+    private httpClient:HttpClient
+  ) { }
+
+  addToCart(cardetail:CarDetail){
+    let item = CartItems.find(c=>c.carDetail.carId===cardetail.carId);
+    if(item){
       item.quantity+=1;
+      item.totalamount=(item.carDetail.dailyPrice)*(item.quantity)
     }else{
-      let cartItem = new CartItem
-      cartItem.carDetail =carDetail;
-      cartItem.quantity =1;
-      CartItems.push(cartItem)
+      let cartItem = new CartItem();
+      cartItem.carDetail = cardetail;
+      cartItem.quantity = 1;
+      cartItem.totalamount = cartItem.carDetail.dailyPrice;
+      CartItems.push(cartItem);
     }
   }
 
-  removeFromCart(carDetail:CarDetail){
-    let item:CartItem = CartItems.find(c=>c.carDetail.carId===carDetail.carId);
-     CartItems.splice(CartItems.indexOf(item),1);
+  removeFromCart(cardetail:CarDetail){
+    let item = CartItems.find(c=>c.carDetail.carId===cardetail.carId);
+    CartItems.splice(CartItems.indexOf(item),1);
   }
+
   list():CartItem[]{
     return CartItems;
+  }
+
+  getCarDetails(carId:number):Observable<ListResponseModel<CarDetail>>{
+    let newPath=this.apiUrl + "cars/getcardetailsbyid?carId="+carId
+    return this.httpClient.get<ListResponseModel<CarDetail>>(newPath);
   }
 }

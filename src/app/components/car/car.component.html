@@ -10,6 +10,7 @@
 {{filterText}} aradınız
 </div>
 
+<app-car-filter></app-car-filter>
 
   <div class="card-container">
       <div id="card" class="card" style="width: 18rem;" *ngFor="let carDetail of carDetails | filterPipe:filterText ">
