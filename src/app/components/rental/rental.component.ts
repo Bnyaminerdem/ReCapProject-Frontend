@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { RentalDetail } from '../../models/rentalDetail';
-import { RentalDetailService } from '../../services/rental-detail.service';
 import { CarDetail } from '../../models/carDetail';
+import { RentalService } from '../../services/rental.service';
 
 @Component({
   selector: 'app-rental-detail',
-  templateUrl: './rental-detail.component.html',
-  styleUrl: './rental-detail.component.css'
+  templateUrl: './rental.component.html',
+  styleUrl: './rental.component.css'
 })
-export class RentalDetailComponent implements OnInit {
+export class RentalComponent implements OnInit {
 
   rentalDetails : RentalDetail[] = [];
   carDetails:CarDetail[];
 
-  constructor(private rentalDetailService:RentalDetailService){}
+  constructor(private rentalService:RentalService){}
   ngOnInit(): void {
     this.getRentalDetails();
   }
   getRentalDetails(){
-    this.rentalDetailService.getRentalDetails().subscribe(response=>{
+    this.rentalService.getRentalDetails().subscribe(response=>{
       this.rentalDetails = response.data
     });
   }
